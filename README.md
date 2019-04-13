@@ -1,8 +1,4 @@
 # iNitrOMZ
-<<<<<<< HEAD
-1D BGC adv. diff. model set up over an OMZ with focus on the low oxygen nitrogen cycle
-test
-=======
 Requires MATLAB 2013 or above.
 
 ### Quick intro
