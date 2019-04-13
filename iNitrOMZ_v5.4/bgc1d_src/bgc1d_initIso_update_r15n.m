@@ -8,11 +8,13 @@ function bgc = bgc1d_initIso_update_r15n(bgc,t)
  %%%%%%%%%%%%%%%%%%%%
 
  %% Initialize isotopic ratios %%
- bgc.r15norg = ones(size(bgc.zgrid));
- bgc.r15no3 = ones(size(bgc.zgrid));
- bgc.r15no2 = ones(size(bgc.zgrid));
- bgc.r15nh4 = ones(size(bgc.zgrid));
- bgc.r15n2o = ones(size(bgc.zgrid));
+ bgc.r15norg = nan(size(bgc.zgrid));
+ bgc.r15no3 = nan(size(bgc.zgrid));
+ bgc.r15no2 = nan(size(bgc.zgrid));
+ bgc.r15nh4 = nan(size(bgc.zgrid));
+ bgc.r15n2o = nan(size(bgc.zgrid));
+ bgc.r15n2oA = nan(size(bgc.zgrid));
+ bgc.r15n2oB = nan(size(bgc.zgrid));
 
 % %%%%%%%% Corg %%%%%%%
 % idx = t.poc>0;
@@ -56,5 +58,7 @@ eps=10^-23;
  bgc.r15nh4 = (t.i15nh4+eps)./(t.nh4+eps);     % 15N/(14N+15N) of ammonia
 
  %%%%%%%% N2O %%%%%%%%
+ bgc.r15n2oA = (t.i15n2oA+eps)./(t.n2o+eps); % 15N/(14N+15N) of nitrous oxide Alpha
+ bgc.r15n2oB = (t.i15n2oB+eps)./(t.n2o+eps); % 15N/(14N+15N) of nitrous oxide Beta
  i15n2o = t.i15n2oA + t.i15n2oB;
  bgc.r15n2o = (i15n2o+eps)./(t.n2o+eps);     % 15N/(14N+15N) of nitrous oxide

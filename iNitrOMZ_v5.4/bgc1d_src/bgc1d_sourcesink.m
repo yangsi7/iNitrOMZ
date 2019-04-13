@@ -117,9 +117,6 @@
 	 sms.i15n2oind.ammox = 0.5 .* bgc.r15nh4 .* bgc.alpha_ammox_n2o .* sms.n2oind.ammox;
 	 sms.i15n2oind.nden  = 0.5 .* bgc.r15nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden;
   	 sms.i15n2oind.den2  = 0.5 .* bgc.r15no2 .* bgc.alpha_den2 .* sms.n2oind.den2;
-	 sms.i15n2oind.den3  = - bgc.r15n2o .* bgc.alpha_den3 .* sms.n2oind.den3;
-	 % Sum all SMS
-	 sms.i15n2o = sms.i15n2oind.ammox + sms.i15n2oind.nden + sms.i15n2oind.den2 + sms.i15n2oind.den3;
 	 % Get isotopomer partitionning
 	 %ammox
 	 ii = dNisoSP('i15N', sms.i15n2oind.ammox, 'N', sms.n2oind.ammox, 'SP', bgc.n2oSP_ammox); 
@@ -134,8 +131,11 @@
 	 sms.i15n2oAind.den2 = ii.i15N_A;
          sms.i15n2oBind.den2 = ii.i15N_B;
 	 % Total
-	 sms.i15n2oA = ii.i15N_A + ii.i15N_A + ii.i15N_A - nanmax(t.i15n2oA./(t.i15n2oA+t.i15n2oB).*sms.i15n2oind.den3,0);
-	 sms.i15n2oB = ii.i15N_B + ii.i15N_B + ii.i15N_B - nanmax(t.i15n2oB./(t.i15n2oA+t.i15n2oB).*sms.i15n2oind.den3,0);
+	 sms.i15n2oA = ii.i15N_A + ii.i15N_A + ii.i15N_A + bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
+	 sms.i15n2oB = ii.i15N_B + ii.i15N_B + ii.i15N_B + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
+	 sms.i15n2oind.den3  = bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
+         % Sum all SMS
+         sms.i15n2o = sms.i15n2oind.ammox + sms.i15n2oind.nden + sms.i15n2oind.den2 + sms.i15n2oind.den3;
 
 	 % Checks
 	 if (sms.i15n2oind.ammox ~= sms.i15n2oAind.ammox + sms.i15n2oBind.ammox) 

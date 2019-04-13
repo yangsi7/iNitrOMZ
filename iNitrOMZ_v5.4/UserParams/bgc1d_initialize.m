@@ -17,7 +17,7 @@
  %%%%%%% User specific  %%%%%%%%%
  bgc.RunName = 'spinup_ETSP';
  bgc.region = 'ETSP';
- bgc.root = '/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ_v5.4/';
+ bgc.root = '/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ/iNitrOMZ_v5.4/';
  bgc.wup_profile = '/Data/vertical_CESM.mat'; % vertical velocities
  bgc.Tau_profiles = '/Data/Tau_restoring.mat'; % Depth dependant Restoring timescale
  bgc.visible = 'on'; % Show figures in X window
@@ -29,9 +29,9 @@
  bgc.zbottom = -1330; % bottom depth (m)
 
  %%%%% Time step / history %%%%%%
- bgc.nt = 1000;% Simulation length in timesteps
- bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
- bgc.hist = 10; % save a snapshot every X timesteps
+ bgc.nt = 10000;% Simulation length in timesteps
+ bgc.dt = 500%100000; % timestep in seconds bgc.hist =  500; 
+ bgc.hist = 10000/100; % save a snapshot every X timesteps
  bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
  bgc.SaveRestart = 0; %Save restart file? 1 yes, 0 no

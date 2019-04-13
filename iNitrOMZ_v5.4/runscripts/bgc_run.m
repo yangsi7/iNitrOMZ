@@ -1,4 +1,4 @@
-bgc.root='/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ_v5.4/';
+bgc.root='/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ/iNitrOMZ_v5.4/';
 cd(bgc.root);
 bgc1d_paths_init;
 
