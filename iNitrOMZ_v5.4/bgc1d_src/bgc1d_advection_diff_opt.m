@@ -73,7 +73,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
 	end
   end
 
-  % dump tracers in a structure "t"
+  % dump tracers in a structure "tr"
   for f = 1 : length(bgc.varname)
       tmp=eval(bgc.varname{f});
       tr.(bgc.varname{f}) = tmp(1,:);

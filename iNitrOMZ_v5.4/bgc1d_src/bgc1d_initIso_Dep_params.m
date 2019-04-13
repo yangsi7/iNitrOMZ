@@ -9,11 +9,11 @@
  %%%%%% Ammonium oxidation %%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % Alpha for ammox -- NH4-->NO2:
- bgc.alpha_ammox_no2 = 1.0 -bgc.eps_ammox_no2./1000.0;  % Fractionation factor during ammox (permil)
+ bgc.alpha_ammox_no2 = 1.0 - bgc.eps_ammox_no2./1000.0;  % Fractionation factor during ammox (permil)
  % Alpha for ammox -- NH4-->N2O:
- bgc.alpha_ammox_n2o = 1.0 -bgc.eps_ammox_n2o./1000.0;  % Fractionation factor during N2O prod. via NH2OH (permil)
+ bgc.alpha_ammox_n2o = 1.0 - bgc.eps_ammox_n2o./1000.0;  % Fractionation factor during N2O prod. via NH2OH (permil)
  % Alpha for nitrif-denitrif -- NH4-->NO2:
- bgc.alpha_nden_no2 = 1.0 -bgc.eps_nden_no2./1000.0;    % Fractionation factor during nitrifier-denitrification (permil)
+ bgc.alpha_nden_no2 = 1.0 - bgc.eps_nden_no2./1000.0;    % Fractionation factor during nitrifier-denitrification (permil)
  % Alpha for nitrif-denitrif -- NH4-->N2O:
  bgc.alpha_nden_n2o = 1.0 - bgc.eps_nden_n2o./1000.0;    % Fractionation factor during nitrifier-denitrification (permil)
 

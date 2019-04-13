@@ -25,4 +25,3 @@ options = optimoptions('ga','ConstraintTolerance',1e-6,'PlotFcn', @gaplotbestf,'
 
 x = ga(@bgc1d_fc2minimize,nparam,[],[],Aeq,beq,param_min,param_max,[],options);
 
-save('/oasis/scratch/comet/yangsi/temp_project/MATLAB/NITRO_MGA_v5.2/GA_output/gafeb24.mat','x');

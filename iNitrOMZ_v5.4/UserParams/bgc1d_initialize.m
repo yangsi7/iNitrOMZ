@@ -29,8 +29,8 @@
  bgc.zbottom = -1330; % bottom depth (m)
 
  %%%%% Time step / history %%%%%%
- bgc.nt = 10000;% Simulation length in timesteps
- bgc.dt = 500%100000; % timestep in seconds bgc.hist =  500; 
+ bgc.nt = 1000000;% Simulation length in timesteps
+ bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
  bgc.hist = 10000/100; % save a snapshot every X timesteps
  bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
@@ -145,6 +145,7 @@
  bgc.forceanoxic_bounds = [-350 -100]; 
 
  % Calculate BGC/N-cycling parameters  that depepend on bgc1d_initbgc_params
+ addpath(genpath(bgc.root));
  if bgc.depparams
         bgc = bgc1d_initialize_DepParam(bgc);
 	% Calculate dependant variables relate to isotopes
