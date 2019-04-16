@@ -80,6 +80,8 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   end
   tr.poc=poc(1,:);
   % Get initial SMS
+  % Calculate SMS
+  % update 15N/N ratios
   sms =  bgc1d_sourcesink(bgc,tr);
 
   % % % Initialize particulate flux at the top
@@ -164,6 +166,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   	end
 	tr.poc=poc(1,:);
 	% Calculate SMS
+	% update 15N/N ratios
   	sms =  bgc1d_sourcesink(bgc,tr);
   
         %%%% Implicit sinking: update steady state POC sinking flux
@@ -304,10 +307,10 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   			srest((t/bgc.hist),8,2:end-1) = restoring.n2(2:end-1);
   			if bgc.RunIsotopes
   				srest((t/bgc.hist),9,2:end-1) = restoring.i15no3(2:end-1);
-                                  srest((t/bgc.hist),10,2:end-1) = restoring.i15no2(2:end-1);
-                                  srest((t/bgc.hist),11,2:end-1) = restoring.i15nh4(2:end-1);
-                                  srest((t/bgc.hist),12,2:end-1) = restoring.i15n2oA(2:end-1);
-                                  srest((t/bgc.hist),13,2:end-1) = restoring.i15n2oB(2:end-1);
+                                srest((t/bgc.hist),10,2:end-1) = restoring.i15no2(2:end-1);
+                                srest((t/bgc.hist),11,2:end-1) = restoring.i15nh4(2:end-1);
+                                srest((t/bgc.hist),12,2:end-1) = restoring.i15n2oA(2:end-1);
+                                srest((t/bgc.hist),13,2:end-1) = restoring.i15n2oB(2:end-1);
   			end
   		end
   

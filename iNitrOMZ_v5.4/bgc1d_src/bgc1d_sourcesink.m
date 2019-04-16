@@ -57,20 +57,20 @@
  %----------------------------------------------------------------------
  Anammox = bgc.KAx .* mm1(t.nh4,bgc.KNH4Ax) .* mm1(t.no2,bgc.KNO2Ax) .* fexp(t.o2,bgc.KO2Ax);
 
- %----------------------------------------------------------------------
- % (7)  Prevent overshooting to negative concentrations
- %----------------------------------------------------------------------
+% %----------------------------------------------------------------------
+% % (7)  Prevent overshooting to negative concentrations
+% %----------------------------------------------------------------------
 % if (t.o2 +(-bgc.OCrem .* RemOx - 1.5*Ammox - 0.5 .* Nitrox).*bgc.dt < 0)
 % 	RemOx = (t.o2./bgc.dt -1.5*Ammox - 0.5 .* Nitrox)./bgc.OCrem;
 % 	RemOx(RemOx<0)=0;
 % elseif t.no3+(-bgc.NCden1 .* RemDen1 + Nitrox).*bgc.dt < 0
 % 	RemDen1 = (t.no3./bgc.dt + Nitrox)./bgc.NCden1;	
 % 	RemDen1(RemDen1<0)=0;
-% elseif t.n2o+( 0.5 * bgc.NCden2 * RemDen2 - bgc.NCden3 * RemDen3 + SoN2OAo).*bgc.dt<0
-% 	RemDen3 = (t.n2o./bgc.dt + 0.5 * bgc.NCden2 * RemDen2 + SoN2OAo)./ bgc.NCden3
+% elseif t.n2o+( 0.5 * bgc.NCden2 * RemDen2 - bgc.NCden3 * RemDen3 + 0.5 .* (Jnn2o_hx+Jnn2o_nden)).*bgc.dt<0
+% 	RemDen3 = (t.n2o./bgc.dt + 0.5 * bgc.NCden2 * RemDen2 +  0.5 .* (Jnn2o_hx+Jnn2o_nden))./ bgc.NCden3;
 % 	RemDen3(RemDen3<0)=0;
-% elseif t.no2+(SoNO2Ao - Nitrox + bgc.NCden1 .* RemDen1 - bgc.NCden2 .* RemDen2 - Anammox).*bgc.dt<0
-% 	RemDen2 = (+t.no2./bgc.dt+SoNO2Ao-Nitrox + bgc.NCden1 .* RemDen1 - Anammox)./bgc.NCden2
+% elseif t.no2+(Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - bgc.NCden2 .* RemDen2 - Anammox).*bgc.dt<0
+% 	RemDen2 = (+t.no2./bgc.dt+Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - Anammox)./bgc.NCden2;
 % 	RemDen2(RemDen2<0)=0;
 % end
 % % rescale remin. rates 
@@ -99,7 +99,6 @@
  sms.n2o = sms.n2oind.ammox + sms.n2oind.nden + sms.n2oind.den2 + sms.n2oind.den3;
 
  if bgc.RunIsotopes
-	 % update 15N/N ratios
 	 bgc = bgc1d_initIso_update_r15n(bgc,t);
 	 % Calculate sources and sinks for 15N tracers
 	 sms.i15no3 = bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ...
@@ -109,7 +108,7 @@
 	    	    - bgc.r15no2 .* bgc.alpha_den2 .* bgc.NCden2 .* RemDen2 ...
 	            - bgc.r15no2 .* bgc.alpha_ax_no2 .* Anammox ...
 	            - bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ;
-	 sms.i15nh4 = bgc.r15norg.*bgc.NCrem .* (RemOx + RemDen1 + RemDen2 + RemDen3) ...
+	 sms.i15nh4 = bgc.r15norg.* bgc.NCrem .* (RemOx + RemDen1 + RemDen2 + RemDen3) ...
 	            - bgc.r15nh4 .* (bgc.alpha_ammox_no2 .* Jno2_hx + bgc.alpha_nden_no2 .* Jno2_nden) ...
 	 	    - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
 		    - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;

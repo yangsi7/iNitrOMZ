@@ -29,9 +29,9 @@
  bgc.zbottom = -1330; % bottom depth (m)
 
  %%%%% Time step / history %%%%%%
- bgc.nt = 1000000;% Simulation length in timesteps
+ bgc.nt = 50000;% Simulation length in timesteps
  bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
- bgc.hist = 10000/100; % save a snapshot every X timesteps
+ bgc.hist = 10000/10; % save a snapshot every X timesteps
  bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
  bgc.SaveRestart = 0; %Save restart file? 1 yes, 0 no
@@ -65,7 +65,7 @@
  % Choose constant (=0) or depth-dependant (=1) upwelling velocity
  % depth-dependant velocity requires a forcing file (set in bgc1d_initialize_DepParam.m)
  bgc.depthvar_wup = 0; 
- bgc.wup_param = 1.8395e-7; % m/s
+ bgc.wup_param =1.683e-7;% 1.8395e-7; % m/s
 
  %%%%%%%%%%% Diffusion %%%%%%%%%%
  bgc.Kv_param  = 1.701e-5; % constant vertical diffusion coefficient in m^2/s
@@ -107,10 +107,10 @@
 
  %%%%%% On and off switches %%%%%%%%%
  % Restoring switches: 1 to restore, 0 for no restoring
- bgc.PO4rest = 1;
- bgc.NO3rest = 1;
+ bgc.PO4rest = 0;
+ bgc.NO3rest = 0;
  bgc.O2rest  = 0;
- bgc.N2Orest =1 ;
+ bgc.N2Orest =0 ;
  bgc.NH4rest = 0;
  bgc.N2rest = 0;
  bgc.NO2rest = 0;
