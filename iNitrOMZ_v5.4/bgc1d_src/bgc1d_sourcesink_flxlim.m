@@ -5,11 +5,11 @@
  % Specifies the biogeochemical sources and sinks for OMZ nutrient/POC/N2O model
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- % Make sure we have no negative concentration
- ff=fields(t);
- for f = 1 : length(ff)
- 	t.(ff{f})(t.(ff{f})<0)=0;
- end
+% % Make sure we have no negative concentration
+% ff=fields(t);
+% for f = 1 : length(ff)
+% 	t.(ff{f})(t.(ff{f})<0)=0;
+% end
 
  % % % % % % % % % % % %
  % % % % J-OXIC  % % % %
@@ -57,22 +57,22 @@
  %----------------------------------------------------------------------
  Anammox = bgc.KAx .* mm1(t.nh4,bgc.KNH4Ax) .* mm1(t.no2,bgc.KNO2Ax) .* fexp(t.o2,bgc.KO2Ax);
 
-% %----------------------------------------------------------------------
-% % (7)  Prevent overshooting to negative concentrations
-% %----------------------------------------------------------------------
-% if (t.o2 +(-bgc.OCrem .* RemOx - 1.5*Ammox - 0.5 .* Nitrox).*bgc.dt < 0)
-% 	RemOx = (t.o2./bgc.dt -1.5*Ammox - 0.5 .* Nitrox)./bgc.OCrem;
-% 	RemOx(RemOx<0)=0;
-% elseif t.no3+(-bgc.NCden1 .* RemDen1 + Nitrox).*bgc.dt < 0
-% 	RemDen1 = (t.no3./bgc.dt + Nitrox)./bgc.NCden1;	
-% 	RemDen1(RemDen1<0)=0;
-% elseif t.n2o+( 0.5 * bgc.NCden2 * RemDen2 - bgc.NCden3 * RemDen3 + 0.5 .* (Jnn2o_hx+Jnn2o_nden)).*bgc.dt<0
-% 	RemDen3 = (t.n2o./bgc.dt + 0.5 * bgc.NCden2 * RemDen2 +  0.5 .* (Jnn2o_hx+Jnn2o_nden))./ bgc.NCden3;
-% 	RemDen3(RemDen3<0)=0;
-% elseif t.no2+(Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - bgc.NCden2 .* RemDen2 - Anammox).*bgc.dt<0
-% 	RemDen2 = (+t.no2./bgc.dt+Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - Anammox)./bgc.NCden2;
-% 	RemDen2(RemDen2<0)=0;
-% end
+ %----------------------------------------------------------------------
+ % (7)  Prevent overshooting to negative concentrations
+ %----------------------------------------------------------------------
+ if (t.o2 +(-bgc.OCrem .* RemOx - 1.5*Ammox - 0.5 .* Nitrox).*bgc.dt < 0)
+ 	RemOx = (t.o2./bgc.dt -1.5*Ammox - 0.5 .* Nitrox)./bgc.OCrem;
+ 	RemOx(RemOx<0)=0;
+ elseif t.no3+(-bgc.NCden1 .* RemDen1 + Nitrox).*bgc.dt < 0
+ 	RemDen1 = (t.no3./bgc.dt + Nitrox)./bgc.NCden1;	
+ 	RemDen1(RemDen1<0)=0;
+ elseif t.n2o+( 0.5 * bgc.NCden2 * RemDen2 - bgc.NCden3 * RemDen3 + 0.5 .* (Jnn2o_hx+Jnn2o_nden)).*bgc.dt<0
+ 	RemDen3 = (t.n2o./bgc.dt + 0.5 * bgc.NCden2 * RemDen2 +  0.5 .* (Jnn2o_hx+Jnn2o_nden))./ bgc.NCden3;
+ 	RemDen3(RemDen3<0)=0;
+ elseif t.no2+(Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - bgc.NCden2 .* RemDen2 - Anammox).*bgc.dt<0
+ 	RemDen2 = (+t.no2./bgc.dt+Jno2_hx + Jno2_nden - Nitrox + bgc.NCden1 .* RemDen1 - Anammox)./bgc.NCden2;
+ 	RemDen2(RemDen2<0)=0;
+ end
 % % rescale remin. rates 
  KRemOx = RemOx./t.poc;
  KRemDen1 = RemDen1./t.poc;
@@ -99,7 +99,7 @@
  sms.n2o = sms.n2oind.ammox + sms.n2oind.nden + sms.n2oind.den2 + sms.n2oind.den3;
 
  if bgc.RunIsotopes
-	 % Update 15N/N ratios
+	 % update 15N/N ratios
 	 bgc = bgc1d_initIso_update_r15n(bgc,t);
 	 % Calculate sources and sinks for 15N tracers
 	 sms.i15no3 = bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ...
