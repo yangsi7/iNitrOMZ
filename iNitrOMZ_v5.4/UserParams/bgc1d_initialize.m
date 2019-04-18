@@ -29,12 +29,12 @@
  bgc.zbottom = -1330; % bottom depth (m)
 
  %%%%% Time step / history %%%%%%
- bgc.nt = 50000;% Simulation length in timesteps
- bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
+ bgc.nt = 200000;% Simulation length in timesteps
+ bgc.dt = 10000; % timestep in seconds bgc.hist =  500; 
  bgc.hist = 10000/10; % save a snapshot every X timesteps
- bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
+ bgc.FromRestart = 1; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
- bgc.SaveRestart = 0; %Save restart file? 1 yes, 0 no
+ bgc.SaveRestart = 1; %Save restart file? 1 yes, 0 no
 
  %% Advection diffusion scheme %%
  % 'FTCS': Forward in time and cenetered in space

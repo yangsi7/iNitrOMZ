@@ -58,16 +58,16 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   	poc(1,:) = linspace(bgc.poc_flux_top/bgc.wsink(1),0.01,bgc.npt+1);
   	o2(1,:) = linspace(bgc.o2_top,bgc.o2_bot,bgc.npt+1);
   	no3(1,:) = linspace(bgc.no3_top,bgc.no3_bot,bgc.npt+1);
-  	no2(1,:) = linspace(bgc.no2_top,bgc.no2_bot,bgc.npt+1);
-  	nh4(1,:) = linspace(bgc.nh4_top,bgc.nh4_bot,bgc.npt+1);
+  	no2(1,:) = 10^-23;linspace(bgc.no2_top,bgc.no2_bot,bgc.npt+1);
+  	nh4(1,:) = 10^-23;;linspace(bgc.nh4_top,bgc.nh4_bot,bgc.npt+1);
   	n2o(1,:) = linspace(bgc.n2o_top,bgc.n2o_bot,bgc.npt+1);
   	n2(1,:) = linspace(bgc.n2_top,bgc.n2_bot,bgc.npt+1);
   	po4(1,:) = linspace(bgc.po4_top,bgc.po4_bot,bgc.npt+1);
 	if bgc.RunIsotopes
 
                 i15no3(1,:) = linspace(bgc.i15no3_top,bgc.i15no3_bot,bgc.npt+1);
-                i15no2(1,:) = linspace(bgc.i15no2_top,bgc.i15no2_bot,bgc.npt+1);
-		i15nh4(1,:) = linspace(bgc.i15nh4_top,bgc.i15nh4_bot,bgc.npt+1);
+                i15no2(1,:) = 10^-23*0.0037;linspace(bgc.i15no2_top,bgc.i15no2_bot,bgc.npt+1);
+		i15nh4(1,:) = 10^-23*0.0037;linspace(bgc.i15nh4_top,bgc.i15nh4_bot,bgc.npt+1);
                 i15n2oA(1,:) = linspace(bgc.i15n2oA_top,bgc.i15n2oA_bot,bgc.npt+1);
                 i15n2oB(1,:) = linspace(bgc.i15n2oB_top,bgc.i15n2oB_bot,bgc.npt+1);
 	end
