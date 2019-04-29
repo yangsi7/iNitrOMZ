@@ -131,8 +131,8 @@
 	 sms.i15n2oAind.den2 = ii.i15N_A;
          sms.i15n2oBind.den2 = ii.i15N_B;
 	 % Total
-	 sms.i15n2oA = ii.i15N_A + ii.i15N_A + ii.i15N_A + bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
-	 sms.i15n2oB = ii.i15N_B + ii.i15N_B + ii.i15N_B + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
+	 sms.i15n2oA = sms.i15n2oAind.ammox + sms.i15n2oAind.nden + sms.i15n2oAind.den2 + bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
+	 sms.i15n2oB = sms.i15n2oBind.ammox + sms.i15n2oBind.nden + sms.i15n2oBind.den2 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
 	 sms.i15n2oind.den3  = bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
          % Sum all SMS
          sms.i15n2o = sms.i15n2oind.ammox + sms.i15n2oind.nden + sms.i15n2oind.den2 + sms.i15n2oind.den3;
