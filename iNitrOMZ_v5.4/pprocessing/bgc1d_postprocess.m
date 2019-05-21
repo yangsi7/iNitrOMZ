@@ -92,17 +92,19 @@
  bgc.RemDen2   = sms.RemDen2;
  bgc.RemDen3   = sms.RemDen3;    
  bgc.Jnn2o_hx = sms.Jnn2o_hx;
- bgc.Jnn2o_hx = sms.Jnn2o_nden;
+ bgc.Jnn2o_nden = sms.Jnn2o_nden;
  bgc.Jno2_hx = sms.Jno2_hx;
- bgc.Jno2_hx = sms.Jno2_nden;
+ bgc.Jno2_nden = sms.Jno2_nden;
  bgc.Jn2o_prod = sms.Jn2o_prod;
  bgc.Jn2o_cons = sms.Jn2o_cons;
  bgc.Jno2_prod = sms.Jno2_prod;
  bgc.Jno2_cons = sms.Jno2_cons;    
  bgc.sms_n2o = sms.n2o;    
 
- bgc.r15no3 = sms.r15no3;
- bgc.r15no2 = sms.r15no2;
- bgc.r15nh4 = sms.r15nh4;
- bgc.r15norg = sms.r15nh4;
- bgc.r15n2o = sms.r15n2o;
+ if bgc.RunIsotopes
+ 	bgc.r15no3 = sms.r15no3;
+ 	bgc.r15no2 = sms.r15no2;
+ 	bgc.r15nh4 = sms.r15nh4;
+ 	bgc.r15norg = sms.r15nh4;
+ 	bgc.r15n2o = sms.r15n2o;
+ end

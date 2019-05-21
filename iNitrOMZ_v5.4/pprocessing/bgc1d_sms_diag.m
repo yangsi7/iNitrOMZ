@@ -151,9 +151,11 @@ sms.Jno2_prod = Jno2_hx + Jno2_nden + bgc.NCden1 .* RemDen1;
 sms.Jno2_cons = - bgc.NCden2 .* RemDen2 - Anammox - Nitrox;
 sms.kpoc = - (RemDen1 -RemDen2-RemDen3-RemOx)./bgc.poc;
 
-sms.r15no3=bgc.r15no3;
-sms.r15no2=bgc.r15no2;
-sms.r15nh4=bgc.r15nh4;
-sms.r15norg=bgc.r15nh4;
-sms.r15n2o=bgc.r15n2o;
+if bgc.RunIsotopes
+	sms.r15no3=bgc.r15no3;
+	sms.r15no2=bgc.r15no2;
+	sms.r15nh4=bgc.r15nh4;
+	sms.r15norg=bgc.r15nh4;
+	sms.r15n2o=bgc.r15n2o;
+end
 

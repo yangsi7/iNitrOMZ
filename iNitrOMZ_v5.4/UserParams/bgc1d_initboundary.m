@@ -30,7 +30,7 @@ function bgc = bgc1d_initboundary(bgc)
 
 
   elseif strcmp(bgc.region, 'ETSP')
-        bgc.poc_flux_top = -10.0/86400;%-5.96/86400; % Bry cond. for top POC Flux            (mmolC/m2/s)
+        bgc.poc_flux_top = -7.0/86400;%-5.96/86400; % Bry cond. for top POC Flux            (mmolC/m2/s)
         bgc.o2_top  = 215;              % Bry cond. for surface Oxygen          (mmolO2/m3)
         bgc.o2_bot  = 77.; %15;%8.2     % Bry cond. for deep Oxygen             (mmolO2/m3)
         bgc.no3_top = 2.813;            % Bry cond. for surface Nitrate         (mmolNO3/m3)

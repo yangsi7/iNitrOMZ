@@ -29,9 +29,9 @@
  bgc.zbottom = -1330; % bottom depth (m)
 
  %%%%% Time step / history %%%%%%
- bgc.nt = 200000;% Simulation length in timesteps
- bgc.dt = 10000; % timestep in seconds bgc.hist =  500; 
- bgc.hist = 10000/10; % save a snapshot every X timesteps
+ bgc.nt = 50000;% Simulation length in timesteps
+ bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
+ bgc.hist = 10000; % save a snapshot every X timesteps
  bgc.FromRestart = 1; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
  bgc.SaveRestart = 1; %Save restart file? 1 yes, 0 no
@@ -49,7 +49,7 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
  %%%% Prognostic variables %%%%%%
- bgc.RunIsotopes = true; % true -> run with isotopes
+ bgc.RunIsotopes = false; % true -> run with isotopes
  bgc.tracers = {'o2', 'no3', 'po4', 'n2o', 'nh4', 'no2', 'n2'};
  bgc.isotopes = {'i15no3', 'i15no2', 'i15nh4', 'i15n2oA', 'i15n2oB'};
 
@@ -107,10 +107,10 @@
 
  %%%%%% On and off switches %%%%%%%%%
  % Restoring switches: 1 to restore, 0 for no restoring
- bgc.PO4rest = 0;
- bgc.NO3rest = 0;
+ bgc.PO4rest = 1;
+ bgc.NO3rest = 1;
  bgc.O2rest  = 0;
- bgc.N2Orest =0 ;
+ bgc.N2Orest =1 ;
  bgc.NH4rest = 0;
  bgc.N2rest = 0;
  bgc.NO2rest = 0;

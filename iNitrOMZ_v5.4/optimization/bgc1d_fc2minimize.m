@@ -1,4 +1,4 @@
-function cost = bgc1d_fc2minimize(x)
+function cost = bgc1d_fc2minimize(x,xvar)
 
         param_name1 = {'KO2Rem'   'KNO2No' 'KO2Den1'  'KO2Den2'};
         param_name2 = {'KO2Den3'   'KNO3Den1'   'KDen1'  'KDen2'   'KDen3'};
@@ -27,6 +27,7 @@ function cost = bgc1d_fc2minimize(x)
         Data.rates=comprates.ETSP;
         Data.rates.name = {'nh4ton2o' 'noxton2o', 'no3tono2', 'anammox'};
 	Data.rates.convf = [1/1000/(3600*24), 1/1000/(3600*24), 1/1000/(3600*24) , 1/1000/3600];
+
 %specify weights of tracer data for the optimization
                 %'o2' 'no3' 'poc' 'po4' 'n2o' 'nh4' 'no2' 'n2'
 Data.weights =   [1    1     0     1     2     0      1     0];

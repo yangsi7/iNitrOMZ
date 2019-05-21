@@ -33,12 +33,12 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % Denitrif1: NO3 --> NO2
  bgc.KDen1 = 0.08/2/(86400);            % Max. denitrif1 rate (1/s)
- bgc.KO2Den1 = 0.5251;                     % O2 poisoning constant for denitrif1 (mmolO2/m3)
+ bgc.KO2Den1 = 1.0;                     % O2 poisoning constant for denitrif1 (mmolO2/m3)
  bgc.KNO3Den1 = 0.5;                    % Half sat. constant of NO3 for denitrif1 (mmolNO3/m3)
 
  % Denitrif2: NO2 --> N2O
  bgc.KDen2 = 0.08/6/(86400);            % Max. denitrif2 rate (1/s)
- bgc.KO2Den2 =0.112;                    % O2 poisoning constant for denitrif2 (mmolO2/m3)
+ bgc.KO2Den2 =0.3;                    % O2 poisoning constant for denitrif2 (mmolO2/m3)
  bgc.KNO2Den2 = 0.5;                 % Half sat. constant of NO2 for denitrification2 (mmolNO3/m3)
 
  % Denitrif3: N2O --> N2
