@@ -11,7 +11,7 @@
 
 
 % HERE, specify iNitrOMZ root path ($PATHTOINSTALL/iNitrOMZ/)
-bgc1d_root='/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ/';
+bgc1d_root='/Users/colette/Box Sync/iNitrOMZ/';
 addpath(genpath(bgc1d_root)); % adds root to MATLAB's search paths
 
 % initialize the model
