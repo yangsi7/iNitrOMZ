@@ -13,7 +13,7 @@ param_min2  = [   0.01       0.01      remin/10  remin/10  remin/10];
 param_max2  = [    8          8         remin      remin    remin ];
 
 param_name3 = {'KNO2Den2' 'KN2ODen3'  'KAx'     'KNH4Ax'  'KNO2Ax'  'KO2Ax'};
-param_min3  = [  0.001      0.001    remin/10     0.01      0.01      0.01   ];
+param_min3  = [  0.001      0.001    remin/10     0.01      0.01      0.01 ];
 param_max3  = [   0.5        0.5      remin*2     0.5      0.5      8  ];
 
 % Constraints: KDen1 + KDen2 + KDen3 = remin

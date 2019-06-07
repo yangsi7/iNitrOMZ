@@ -52,15 +52,13 @@ toc;
 % Process observations to validate the model solution
 Tracer.name = {'o2' 'no3' 'poc' 'po4' 'n2o' 'nh4' 'no2' 'n2'};
 if strcmp(bgc.region,'ETNP')
-        load([bgc.root,'/Data/compilation_ETNP_gridded.mat']);
-        Data.names = Tracer.name;
-        Data = GA_data_init(bgc,compilation_ETNP_gridded,Tracer.name);
+        load([bgc.root,'/Data/compilation_offshore.mat']);
+        Data = GA_data_init_opt(bgc,compilation_offshore,Tracer.name);
 elseif strcmp(bgc.region,'ETSP')
         load([bgc.root,'/Data/compilation_ETSP_gridded_Feb232018.mat']);
-        Data.names = Tracer.name;
         Data = GA_data_init_opt(bgc,compilation_ETSP_gridded,Tracer.name);
 end
 
 % Process model output for analysis (gathers tracers and diagnostics into the bgc structure)
 bgc = bgc1d_postprocess(bgc, Data);
-bgc1d_plot_GA(bgc, Data)
+bgc1d_plot(bgc); 
