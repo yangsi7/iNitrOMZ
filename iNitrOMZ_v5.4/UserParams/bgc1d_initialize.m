@@ -49,7 +49,7 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
  %%%% Prognostic variables %%%%%%
- bgc.RunIsotopes = false; % true -> run with isotopes
+ bgc.RunIsotopes = true; % true -> run with isotopes
  bgc.tracers = {'o2', 'no3', 'po4', 'n2o', 'nh4', 'no2', 'n2'};
  bgc.isotopes = {'i15no3', 'i15no2', 'i15nh4', 'i15n2oA', 'i15n2oB'};
 

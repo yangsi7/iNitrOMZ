@@ -11,7 +11,9 @@ function cost = bgc1d_fc2minimize(x,xvar)
         end
         % update dependant paramters
         bgc = bgc1d_initialize_DepParam(bgc);
-        bgc = bgc1d_initIso_Dep_params(bgc);
+	if bgc.RunIsotopes
+        	bgc = bgc1d_initIso_Dep_params(bgc);
+	end
         % Run model
 	
         [bgc.sol_time, ~, ~, ~, ~] = bgc1d_advection_diff_opt(bgc);
