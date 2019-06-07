@@ -5,19 +5,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Extract the ini solution from the bgc.sol structure 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-     zstep = bgc.npt;
-     bgc.z = linspace(bgc.zbottom,bgc.ztop,zstep+1);
-     bgc.dz = (bgc.ztop - bgc.zbottom) / zstep;
-     
-     bgc.SolNames = {'o2','no3','poc','po4','n2o', 'nh4', 'no2', 'n2'};
-     if bgc.RunIsotopes
-	     bgc.SolNames = {'o2','no3','poc','po4','n2o', 'nh4', ...
-	     'no2', 'n2', 'i15no3', 'i15no2', 'i15nh4', 'i15n2oA', 'i15n2oB' };
-     end
      bgc.sol = squeeze(bgc.sol_time(end,:,:));
-     ntrSol = length(bgc.SolNames);
-     for indt=1:ntrSol
-     	bgc.(bgc.SolNames{indt}) = bgc.sol(indt,:);
+     for indt=1:bgc.nvar
+     	bgc.(bgcvarname{indt}) = bgc.sol(indt,:);
      	if bgc.flux_diag == 1
      	        bgc.(['adv' bgc.SolNames{indt}]) = bgc.sadv(indt,:);
      	        bgc.(['diff' bgc.SolNames{indt}]) = bgc.sdiff(indt,:);
@@ -37,25 +27,24 @@
      	bgc.(['d2' bgc.SolNames{indt}])(end) = 0;
     end
     if bgc.RunIsotopes
-	    eps = 10^-3;
 	    ii = dNiso('i15N', bgc.i15no3, 'N', bgc.no3);
-	    idx = find(bgc.no3<eps | bgc.i15no3<0);
+	    idx = find(bgc.no3<bgc.IsoThreshold | bgc.i15no3<0);
 	    bgc.d15no3 = ii.d15N;
 	    bgc.d15no3(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15no2, 'N', bgc.no2);
-            idx = find(bgc.no2<eps | bgc.i15no2<0);
+            idx = find(bgc.no2<bgc.IsoThreshold | bgc.i15no2<0);
 	    bgc.d15no2 = ii.d15N;
 	    bgc.d15no2(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15nh4, 'N', bgc.nh4);
-	    idx = find(bgc.nh4<eps | bgc.i15no2<0);
+	    idx = find(bgc.nh4<bgc.IsoThreshold | bgc.i15no2<0);
 	    bgc.d15nh4 = ii.d15N;
 	    bgc.d15nh4(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15n2oA, 'N', bgc.n2o);
-	    idx = find(bgc.n2o<eps/1000 | bgc.i15n2oA<0);
+	    idx = find(bgc.n2o<bgc.IsoThreshold/1000 | bgc.i15n2oA<0);
 	    bgc.d15n2oA = ii.d15N;
 	    bgc.d15n2oA(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15n2oB, 'N', bgc.n2o);
-	    idx = find(bgc.n2o<eps/1000 | bgc.i15n2oB<0);
+	    idx = find(bgc.n2o<bgc.IsoThreshold/1000 | bgc.i15n2oB<0);
 	    bgc.d15n2oB = ii.d15N;
 	    bgc.d15n2oB(idx)=nan;
     end

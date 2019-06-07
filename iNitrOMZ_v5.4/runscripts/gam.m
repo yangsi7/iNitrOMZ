@@ -35,3 +35,7 @@ options = optimoptions('ga','ConstraintTolerance',1e-6,'PlotFcn', @gaplotbestf,'
 % Optimization
 x = ga(costfunc,nparam,[],[],Aeq,beq,param_min,param_max,[],options);
 
+% Save ga output using today's date
+DateNow = bgc1d_getDate();
+save([bgc1d_root,'saveOut/ga_out_',DateNow,'.mat']);
+

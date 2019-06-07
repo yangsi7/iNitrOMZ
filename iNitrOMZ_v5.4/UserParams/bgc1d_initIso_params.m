@@ -1,5 +1,9 @@
 function bgc = bgc1d_initIso_params(bgc)
 
+ %%%%%%%% General %%%%%%%%
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ bgc.IsoThreshold = 10^-2; % Threshold concentration for all N species exept n2o below which we do not 
+ %			   compute deltas. For n2o bgc.IsoThreshold/1000 is used.
 
  %%%%%%%% Ammonification %%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
