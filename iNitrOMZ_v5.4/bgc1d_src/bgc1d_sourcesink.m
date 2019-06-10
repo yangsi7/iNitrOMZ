@@ -82,10 +82,10 @@
      %----------------------------------------------------------------------
      Y = n2o_yield(t.o2, bgc);
      % via NH2OH
-     Jnn2o_hx = 0;%Ammox ;%.* Y.nn2o_hx_nh4;
-     Jno2_hx = Ammox; %;.* (Y.no2_hx_nh4+Y.nn2o_nden_nh4);
+     Jnn2o_hx =Ammox .* Y.nn2o_hx_nh4;
+     Jno2_hx = Ammox.* Y.no2_hx_nh4;
      % via NH4->NO2->N2O
-     Jnn2o_nden = 0;%Ammox .* Y.nn2o_nden_nh4;
+     Jnn2o_nden = Ammox .* Y.nn2o_nden_nh4;
 
      % % % % % % % % % % % %
      % % %   J-ANOXIC  % % %
@@ -144,26 +144,25 @@
 	 	    - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
 		    - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;
 	 % N2O indivisual SMS	    
-	 rrr=3;
-	 sms.i15n2oind.ammox =   bgc.r15nh4.* bgc.alpha_ammox_n2o .*sms.n2oind.ammox;%bgc.r15nh4 .* bgc.alpha_ammox_n2o .* sms.n2oind.ammox;
-	 sms.i15n2oind.nden  =   bgc.r15nh4.* bgc.alpha_nden_n2o .*sms.n2oind.nden;%bgc.r15nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden;
-  	 sms.i15n2oind.den2  =   bgc.r15no2.* bgc.alpha_den2 .*sms.n2oind.den2;%bgc.r15no2 .* bgc.alpha_den2 .* sms.n2oind.den2;
+	 sms.i15n2oind.ammox =   bgc.r15nh4.* bgc.alpha_ammox_n2o .*sms.n2oind.ammox;
+	 sms.i15n2oind.nden  =   bgc.r15nh4.* bgc.alpha_nden_n2o .*sms.n2oind.nden;
+  	 sms.i15n2oind.den2  =   bgc.r15no2.* bgc.alpha_den2 .*sms.n2oind.den2;
 	 % Get isotopomer partitionning
 	 %ammox
 	 ii = dNisoSP('i15N', sms.i15n2oind.ammox, 'N', sms.n2oind.ammox, 'SP', bgc.n2oSP_ammox); 
-	 sms.i15n2oAind.ammox = ii.i15N_A;%0.5.*sms.i15n2oind.ammox;
-	 sms.i15n2oBind.ammox = ii.i15N_B;%0.5.*sms.i15n2oind.ammox;
+	 sms.i15n2oAind.ammox = ii.i15N_A;
+	 sms.i15n2oBind.ammox = ii.i15N_B;
 	 %nitrifier-denitrification
 	 ii = dNisoSP('i15N', sms.i15n2oind.nden, 'N', sms.n2oind.nden, 'SP', bgc.n2oSP_nden);
-	 sms.i15n2oAind.nden = ii.i15N_A;%.*sms.i15n2oind.nden;%ii.i15N_A;
-         sms.i15n2oBind.nden = ii.i15N_B;%sms.i15n2oind.nden;%ii.i15N_B;
+	 sms.i15n2oAind.nden = ii.i15N_A;
+         sms.i15n2oBind.nden = ii.i15N_B;
 	 %denitrification 2 (no2-->n2o)
 	 ii = dNisoSP('i15N', sms.i15n2oind.den2, 'N', sms.n2oind.den2, 'SP', bgc.n2oSP_den2);
-	 sms.i15n2oAind.den2 = ii.i15N_A;%0.5.*sms.i15n2oind.den2;%ii.i15N_A;
-         sms.i15n2oBind.den2 = ii.i15N_B;%0.5.*sms.i15n2oind.den2;%ii.i15N_B;
+	 sms.i15n2oAind.den2 = ii.i15N_A;
+         sms.i15n2oBind.den2 = ii.i15N_B;
 	 % Total
-	 sms.i15n2oA = sms.i15n2oAind.ammox + sms.i15n2oAind.nden+ sms.i15n2oAind.den2 + bgc.r15n2oA.*bgc.alpha_den3_Alpha.*sms.n2oind.den3;%0.5?+ bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
-	 sms.i15n2oB = sms.i15n2oBind.ammox + sms.i15n2oBind.nden + sms.i15n2oBind.den2 + bgc.r15n2oB.*bgc.alpha_den3_Beta.* sms.n2oind.den3;%0.5?+ bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
+	 sms.i15n2oA = sms.i15n2oAind.ammox + sms.i15n2oAind.nden+ sms.i15n2oAind.den2 + bgc.r15n2oA.*bgc.alpha_den3_Alpha.*sms.n2oind.den3;
+	 sms.i15n2oB = sms.i15n2oBind.ammox + sms.i15n2oBind.nden + sms.i15n2oBind.den2 + bgc.r15n2oB.*bgc.alpha_den3_Beta.* sms.n2oind.den3;
 	 sms.i15n2oind.den3  = bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
          % Sum all SMS
          sms.i15n2o = sms.i15n2oind.ammox + sms.i15n2oind.nden + sms.i15n2oind.den2 + sms.i15n2oind.den3;
