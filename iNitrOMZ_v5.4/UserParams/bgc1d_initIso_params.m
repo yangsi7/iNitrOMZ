@@ -2,7 +2,7 @@ function bgc = bgc1d_initIso_params(bgc)
 
  %%%%%%%% General %%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
- bgc.IsoThreshold = 10^-2; % Threshold concentration for all N species exept n2o below which we do not 
+ bgc.IsoThreshold = 10^-10; % Threshold concentration for all N species exept n2o below which we do not 
  %			   compute deltas. For n2o bgc.IsoThreshold/1000 is used.
 
  %%%%%%%% Ammonification %%%%%%%%
@@ -14,7 +14,7 @@ function bgc = bgc1d_initIso_params(bgc)
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % Epsilon for ...
  % .. ammox -- NH4-->NO2: 
- bgc.eps_ammox_no2 = 15.0;          % Enrichment factors during ammox (permil)
+ bgc.eps_ammox_no2 = 25.0;          % Enrichment factors during ammox (permil)
  % .. ammox -- NH4-->N2O:
  bgc.eps_ammox_n2o = 47.0;          % Enrichment factors during N2O prod. via NH2OH (permil)
  % .. nitrif-denitrif -- NH4-->NO2:
@@ -39,10 +39,10 @@ function bgc = bgc1d_initIso_params(bgc)
  % epsilon for den1 -- NO3-->NO2
  bgc.eps_den1 = 15.0;          % Enrichment factors during denitrification 1 (permil)
  % epsilon for den2 -- NO2-->N2O
- bgc.eps_den2 = 15.0;          % Enrichment factors during denitrification 2 (permil)
+ bgc.eps_den2 = 20.0;          % Enrichment factors during denitrification 2 (permil)
  % epsilon for den3 -- N2O-->N2
- bgc.eps_den3_Alpha = 10.0;          % Enrichment factor of N2OA during denitrification 3 (permil)
- bgc.eps_den3_Beta = 10.0;          % Enrichment factors of N2OB during denitrification 3 (permil)
+ bgc.eps_den3_Alpha = 20.0;          % Enrichment factor of N2OA during denitrification 3 (permil)
+ bgc.eps_den3_Beta = 2.0;          % Enrichment factors of N2OB during denitrification 3 (permil)
 
  % SP for ..
  % .. den2 -- NO2-->N2O:

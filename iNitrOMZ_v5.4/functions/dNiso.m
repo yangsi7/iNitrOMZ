@@ -25,5 +25,8 @@ elseif ~isnan(A.N(1)) & ~isnan(A.i15N(1))
 elseif ~isnan(A.N(1)) & ~isnan(A.i14N(1))
         iso.N=A.N; iso.i14N=A.i14N; iso.i15N=A.N-A.i14N;
         iso.d15N = ((A.i15N./iso.i14N)./Nstd1-1.0).*1000.0;
+elseif ~isnan(A.i15N(1)) & ~isnan(A.i14N(1))
+        iso.i14N=A.i14N; iso.N=A.i15N+A.i14N; iso.i15N=A.i15N;
+        iso.d15N = ((A.i15N./iso.i14N)./Nstd1-1.0).*1000.0;	
 end	
 

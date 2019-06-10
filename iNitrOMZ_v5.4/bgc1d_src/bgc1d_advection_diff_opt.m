@@ -59,7 +59,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   	o2(1,:) = linspace(bgc.o2_top,bgc.o2_bot,bgc.npt+1);
   	no3(1,:) = linspace(bgc.no3_top,bgc.no3_bot,bgc.npt+1);
   	no2(1,:) = 10^-23;linspace(bgc.no2_top,bgc.no2_bot,bgc.npt+1);
-  	nh4(1,:) = 10^-23;;linspace(bgc.nh4_top,bgc.nh4_bot,bgc.npt+1);
+  	nh4(1,:) = 10^-23;linspace(bgc.nh4_top,bgc.nh4_bot,bgc.npt+1);
   	n2o(1,:) = linspace(bgc.n2o_top,bgc.n2o_bot,bgc.npt+1);
   	n2(1,:) = linspace(bgc.n2_top,bgc.n2_bot,bgc.npt+1);
   	po4(1,:) = linspace(bgc.po4_top,bgc.po4_bot,bgc.npt+1);
@@ -128,6 +128,15 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
 		i15nh4(2,end) = bgc.i15nh4_bot;
 		i15n2oA(2,end) = bgc.i15n2oA_bot;
 		i15n2oB(2,end) = bgc.i15n2oB_bot;
+		% Check for 0 concentrations
+		idx=(tr.no3+tr.i15no3==0);
+        	no3(1,idx)=0;i15no3(1,idx)=0;
+        	idx=(tr.no2+tr.i15no2==0);
+        	no2(1,idx)=0;i15no2(1,idx)=0;
+        	idx=(tr.nh4+tr.i15nh4==0);
+        	nh4(1,idx)=0;i15nh4(1,idx)=0;
+        	idx=(tr.n2o+tr.i15n2oA+tr.i15n2oB==0);
+        	n2o(1,idx)=0;i15n2oA(1,idx)=0;i15n2oB(1,idx)=0;
         end
 
    	%%%% advection and diffusion
@@ -164,9 +173,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
 		tmp=eval(bgc.varname{f});
         	tr.(bgc.varname{f}) = tmp(1,:);
   	end
-	tr.poc=poc(1,:);
 	% Calculate SMS
-	% update 15N/N ratios
   	sms =  bgc1d_sourcesink(bgc,tr);
   
         %%%% Implicit sinking: update steady state POC sinking flux
