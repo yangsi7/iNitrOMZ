@@ -144,9 +144,16 @@
 	 	    - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
 		    - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;
 	 % N2O indivisual SMS	    
+<<<<<<< HEAD
 	 sms.i15n2oind.ammox =   bgc.r15nh4.* bgc.alpha_ammox_n2o .*sms.n2oind.ammox;
 	 sms.i15n2oind.nden  =   bgc.r15nh4.* bgc.alpha_nden_n2o .*sms.n2oind.nden;
   	 sms.i15n2oind.den2  =   bgc.r15no2.* bgc.alpha_den2 .*sms.n2oind.den2;
+=======
+	 rrr=3;
+	 sms.i15n2oind.ammox =   bgc.r15nh4.*rrr* bgc.alpha_ammox_n2o .*sms.n2oind.ammox;%bgc.r15nh4 .* bgc.alpha_ammox_n2o .* sms.n2oind.ammox;
+	 sms.i15n2oind.nden  =   bgc.r15nh4.*rrr* bgc.alpha_nden_n2o .*sms.n2oind.nden;%bgc.r15nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden;
+  	 sms.i15n2oind.den2  =   bgc.r15no2.* bgc.alpha_den2 .*sms.n2oind.den2;%bgc.r15no2 .* bgc.alpha_den2 .* sms.n2oind.den2;
+>>>>>>> More stuff
 	 % Get isotopomer partitionning
 	 %ammox
 	 ii = dNisoSP('i15N', sms.i15n2oind.ammox, 'N', sms.n2oind.ammox, 'SP', bgc.n2oSP_ammox); 
