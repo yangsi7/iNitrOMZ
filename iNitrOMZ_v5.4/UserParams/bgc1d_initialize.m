@@ -18,7 +18,8 @@
 
  bgc.RunName = 'spinup_ETNP';
  bgc.region = 'ETNP';
- bgc.root = '/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ/iNitrOMZ_v5.4/';
+
+ bgc.root = '/Users/colette/Box Sync/iNitrOMZ/iNitrOMZ_v5.4/';
 
  bgc.wup_profile = '/Data/vertical_CESM.mat'; % vertical velocities
  bgc.Tau_profiles = '/Data/Tau_restoring.mat'; % Depth dependant Restoring timescale
