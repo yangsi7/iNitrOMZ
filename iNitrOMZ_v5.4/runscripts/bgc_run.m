@@ -15,7 +15,9 @@ bgc1d_root='/Users/colette/Box Sync/iNitrOMZ/';
 addpath(genpath(bgc1d_root)); % adds root to MATLAB's search paths
 
 % initialize the model
-bgc = bgc1d_initialize(); 
+clear bgc;
+bgc.depparams = 1; % make sure Dependant parameters are updated
+bgc = bgc1d_initialize(bgc); 
 
 % run the model 
 % % % % % % % % % 

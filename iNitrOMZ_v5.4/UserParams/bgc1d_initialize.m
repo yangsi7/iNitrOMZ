@@ -1,4 +1,4 @@
- function bgc = bgc1d_initialize()
+ function bgc = bgc1d_initialize(bgc)
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % iNitrOMZ v1.0 - Simon Yang  - April 2019
@@ -15,9 +15,11 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
  %%%%%%% User specific  %%%%%%%%%
- bgc.RunName = 'spinup_ETSP';
- bgc.region = 'ETSP';
- bgc.root = '/Users/colette/Box Sync/iNitrOMZ/iNitrOMZ_v5.4/';
+
+ bgc.RunName = 'spinup_ETNP';
+ bgc.region = 'ETNP';
+ bgc.root = '/Users/yangsi/Box Sync/UCLA/MATLAB/BGC_Bianchi/iNitrOMZ/iNitrOMZ_v5.4/';
+
  bgc.wup_profile = '/Data/vertical_CESM.mat'; % vertical velocities
  bgc.Tau_profiles = '/Data/Tau_restoring.mat'; % Depth dependant Restoring timescale
  bgc.visible = 'on'; % Show figures in X window
@@ -31,8 +33,8 @@
  %%%%% Time step / history %%%%%%
  bgc.nt = 50000;% Simulation length in timesteps
  bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
- bgc.hist = 10000; % save a snapshot every X timesteps
- bgc.FromRestart = 1; % initialize from restart? 1 yes, 0 no
+ bgc.hist = 1000; % save a snapshot every X timesteps
+ bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
  bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
  bgc.SaveRestart = 1; %Save restart file? 1 yes, 0 no
 
@@ -50,7 +52,7 @@
 
  %%%% Prognostic variables %%%%%%
  bgc.RunIsotopes = true; % true -> run with isotopes
- bgc.tracers = {'o2', 'no3', 'po4', 'n2o', 'nh4', 'no2', 'n2'};
+ bgc.tracers = {'o2', 'no3','poc', 'po4', 'n2o', 'nh4', 'no2', 'n2'};
  bgc.isotopes = {'i15no3', 'i15no2', 'i15nh4', 'i15n2oA', 'i15n2oB'};
 
  %%%%%%% Particle sinking %%%%%%%
@@ -107,10 +109,10 @@
 
  %%%%%% On and off switches %%%%%%%%%
  % Restoring switches: 1 to restore, 0 for no restoring
- bgc.PO4rest = 1;
- bgc.NO3rest = 1;
+ bgc.PO4rest = 0;
+ bgc.NO3rest = 0;
  bgc.O2rest  = 0;
- bgc.N2Orest =1 ;
+ bgc.N2Orest = 0 ;
  bgc.NH4rest = 0;
  bgc.N2rest = 0;
  bgc.NO2rest = 0;

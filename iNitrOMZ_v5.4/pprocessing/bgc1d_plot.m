@@ -216,5 +216,37 @@ title(['N_2O advection, diffusion, SMS and restoring'] )
 ylabel('z (m)')
 xlabel('(mmol POC m^{-2} s^{-1})')
 
+%subplot(2,2,1)
+% plot(bgc.d15_no3,bgc.zgrid,'k','linewidth',3);
+% grid on;
+% title(['\delta^15NO_3'] )
+% ylabel('z (m)')
+% xlabel('(mmol NO_2 m^{-3})')
+% ylim( [bgc.zbottom bgc.ztop]);
+%
+% subplot(2,2,2)
+% s=scatter(bgc.Data_nh4(~isnan(bgc.Data_nh4)), bgc.zgrid(~isnan(bgc.Data_nh4)),'b')
+% s.LineWidth = 0.6;
+% s.MarkerEdgeColor = 'r';
+% s.MarkerFaceColor = [0 0.5 0.5];
+% grid on; hold on;
+% plot(bgc.nh4,bgc.zgrid,'r','linewidth',3)
+% title(['NH_4'] )
+% ylabel('z (m)')
+% xlabel('(mmol NH_4 m^{-3})')
+% ylim( [bgc.zbottom bgc.ztop]);
+%
+% subplot(2,2,3)
+% s=scatter(bgc.Data_n2(~isnan(bgc.Data_n2)), bgc.zgrid(~isnan(bgc.Data_n2)),'b')
+% s.LineWidth = 0.6;
+% s.MarkerEdgeColor = 'r';
+% s.MarkerFaceColor = [0 0.5 0.5];
+% grid on; hold on;
+% plot(bgc.n2,bgc.zgrid,'k','linewidth',3)
+% grid on;
+% title(['N2'] )
+% ylabel('z (m)')
+% xlabel('(mmol N_2 m^{-3})')
+% ylim( [bgc.zbottom bgc.ztop]);
  end
 
