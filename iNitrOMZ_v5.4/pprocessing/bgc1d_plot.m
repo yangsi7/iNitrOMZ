@@ -147,12 +147,12 @@ xlabel('(mmol N m^{-3} s^{-1})')
 ylim( [bgc.zbottom bgc.ztop]);
 
 subplot(2,2,2)
-plot(bgc.NCden1*bgc.RemDen1+bgc.Jno2_hx+bgc.Jno2_nden-bgc.NCden2*bgc.RemDen2-bgc.Nitrox-bgc.Anammox,bgc.zgrid,'k','linewidth',3)
+plot(bgc.NCden1*bgc.RemDen1+bgc.Jno2_hx-bgc.NCden2*bgc.RemDen2-bgc.Nitrox-bgc.Anammox,bgc.zgrid,'k','linewidth',3)
 grid on; hold on;
 plot(-bgc.NCden2*bgc.RemDen2,bgc.zgrid,'--b','linewidth',2)
 plot(-bgc.Nitrox,bgc.zgrid,'--g','linewidth',2)
 plot(-bgc.Anammox,bgc.zgrid,'--r','linewidth',2)
-plot(bgc.Jno2_hx+bgc.Jno2_nden,bgc.zgrid,'--c','linewidth',2)
+plot(bgc.Jno2_hx,bgc.zgrid,'--c','linewidth',2)
 plot(bgc.NCden1*bgc.RemDen1,bgc.zgrid,'--m','linewidth',2)
 legend('NO_2 SMS','NO_2 reduction','NO_2 oxidation','Anammox','NH_4 oxidation','NO_3 reduction','Location','southwest')
 title(['NO_2 sources and sinks'] )
