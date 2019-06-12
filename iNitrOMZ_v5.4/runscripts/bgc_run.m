@@ -5,7 +5,7 @@
 % Customize your model run in bgc.root/UserParams/
 %   % General model set-up 	 -- bgc1d_initialize.m
 %   % Boundary conditions        -- bgc1d_initboundary.m
-%   % BGC/N-cycling params       -- bgc1d_initbgc_params.m
+%   % BGC/N-cycling params        -- bgc1d_initbgc_params.m
 %   % N-isotopes-cycling params  -- bgc1d_initIso_params.m
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
