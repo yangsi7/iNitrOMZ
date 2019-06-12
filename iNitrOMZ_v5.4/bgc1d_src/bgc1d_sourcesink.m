@@ -40,9 +40,9 @@
      Y = n2o_yield(t.o2, bgc);
      % via NH2OH
      Jnn2o_hx = Ammox .* Y.nn2o_hx_nh4;
-     Jno2_hx = Ammox .* (Y.no2_hx_nh4+Y.nn2o_nden_nh4);
+     Jno2_hx = Ammox.* Y.no2_hx_nh4; %Ammox .* (Y.no2_hx_nh4+Y.nn2o_nden_nh4);
      % via NH4->NO2->N2O
-     Jnn2o_nden = 0;%Ammox .* Y.nn2o_nden_nh4;
+     Jnn2o_nden = Ammox .* Y.nn2o_nden_nh4; %0;
      
      % % % % % % % % % % % %
      % % %   J-ANOXIC  % % % 

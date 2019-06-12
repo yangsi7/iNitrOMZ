@@ -25,34 +25,34 @@ function bgc = bgc1d_initIso_update_r15n(bgc,t)
  idx=(t.no3+t.i15no3~=0);
  bgc.r15no3(idx) = t.i15no3(idx)./(t.no3(idx)+t.i15no3(idx));     % 15N/(14N+15N) of nitrate
  bgc.r14no3(idx) = (t.no3(idx))./(t.no3(idx)+t.i15no3(idx));
- bgc.r15no3(~idx) = 1.0;
- bgc.r14no3(~idx)=1.0;
+ bgc.r15no3(~idx) = 0.0;
+ bgc.r14no3(~idx)=0.0;
 
  %%%%%%%% NO2 %%%%%%%%
  idx=(t.no2+t.i15no2~=0);
  bgc.r15no2(idx) = t.i15no2(idx)./(t.no2(idx)+t.i15no2(idx));     % 15N/(14N+15N) of nitrite
  bgc.r14no2(idx) = (t.no2(idx))./(t.no2(idx)+t.i15no2(idx)); 
- bgc.r15no2(~idx) = 1.0;
- bgc.r14no2(~idx) = 1.0;
+ bgc.r15no2(~idx) = 0.0;
+ bgc.r14no2(~idx) = 0.0;
 
  %%%%%%%% NH4 %%%%%%%%
  idx=(t.nh4+t.i15nh4~=0);
  bgc.r15nh4(idx) = t.i15nh4(idx)./(t.nh4(idx)+t.i15nh4(idx)); % 15N/(14N+15N) of ammonia
  bgc.r14nh4(idx) = (t.nh4(idx))./(t.nh4(idx)+t.i15nh4(idx));
- bgc.r15nh4(~idx) = 1.0;
- bgc.r14nh4(~idx) = 1.0;
+ bgc.r15nh4(~idx) = 0.0;
+ bgc.r14nh4(~idx) = 0.0;
 
  %%%%%%% N2O %%%%%%%%
  t.i15n2o = t.i15n2oA + t.i15n2oB;
  idx=(t.i15n2o+t.n2o~=0);
  bgc.r15n2oA(idx) = t.i15n2oA(idx)./(t.n2o(idx)+t.i15n2o(idx)); % 15N/(14N+15N) of nitrous oxide Alpha
- bgc.r15n2oA(~idx)=1.0;
+ bgc.r15n2oA(~idx)=0.0;
  bgc.r15n2oB(idx) = t.i15n2oB(idx)./(t.n2o(idx)+t.i15n2o(idx)); % 15N/(14N+15N) of nitrous oxide Beta
- bgc.r15n2oB(~idx)=1.0;
+ bgc.r15n2oB(~idx)=0.0;
  bgc.r15n2o(idx) = t.i15n2o(idx)./(t.n2o(idx)+t.i15n2o(idx));     % 15N/(14N+15N) of nitrous oxide
  bgc.r14n2o(idx) = (t.n2o(idx))./(t.n2o(idx)+t.i15n2o(idx));
- bgc.r15n2o(~idx) = 1.0;
- bgc.r14n2o(~idx) = 1.0;
+ bgc.r15n2o(~idx) = 0.0;
+ bgc.r14n2o(~idx) = 0.0;
 
 %eps=10^-23;
 %
