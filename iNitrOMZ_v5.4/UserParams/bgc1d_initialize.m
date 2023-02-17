@@ -19,7 +19,7 @@
  bgc.RunName = 'spinup_ETNP';
  bgc.region = 'ETNP';
 
- bgc.root = '/Users/colette/Box Sync/iNitrOMZ/iNitrOMZ_v5.4/';
+ bgc.root = '/Volumes/GoogleDrive/My Drive/PhD Research/iNitrOMZ/iNitrOMZ_v5.4/';
 
  bgc.wup_profile = '/Data/vertical_CESM.mat'; % vertical velocities
  bgc.Tau_profiles = '/Data/Tau_restoring.mat'; % Depth dependant Restoring timescale

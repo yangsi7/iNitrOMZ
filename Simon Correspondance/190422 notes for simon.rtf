@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 190422 notes for Simon\
+\
+
+\b0 I started a new development branch called \'93isotopes\'94 \'97 so far, I haven\'92t made any major changes, though! (I made one small change \'97 see below.)\
+\
+I went through the code and I think I generally understand your approach. A few questions for you:\
+\
+1) Why are there separate isotope effects for ammonia oxidation to nitrite (\'93bgc.eps_ammox_no2\'94 and \'93bgc.eps_nden_no2\'94)? In my understanding, the processes by which N2O is produced from NH4+ are different, but the process by which NO2- is produced is the same\'85 but I might not understand what you\'92re doing here.\
+\
+2) I saw that the isotope effects (as epsilons) are converted to alpha values in the function \'93bgc1d_initIso_Dep_params.m.\'94 Could you just point out where this function is called?\
+\
+3) Looking at the source-sink function (\'93bgc1d_sourcesink.m\'94), in lines 134-136, how is the model able to tell apart the three different \'93ii.i15NA\'94 terms? (I.e., should these be, \'93sms.i15n2oAind.ammox,\'94 etc.?) I actually tried changing this, and the model output didn\'92t change, so maybe I just don\'92t fully understand the code here.\
+\
+4) Also, let me know when you have forcing files for the ETNP\'85\
+\
+OK, that\'92s all for now! }

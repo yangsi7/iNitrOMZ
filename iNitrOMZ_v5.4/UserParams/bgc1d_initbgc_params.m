@@ -45,7 +45,7 @@
  bgc.KDen3 = 0.08/3/(86400);           % Max. denitrif3 rate (1/s)
  bgc.KO2Den3 = 0.0292;                  % O2 poisoning constant for denitrif3 (mmolO2/m3)
  bgc.KN2ODen3 = 0.02;                   % Half sat. constant of N2O for denitrification3 (mmolNO3/m3)
-
+ bgc.altKDen3 = 0.148/86400*0.6; %0.148/86400*0.6;        % alternate max N2O consumption rate, based on earlier model
  %%%%%%%%%%% Anammox %%%%%%%%%%%%
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  bgc.KAx = 0.02/86400;                % Max. Anaerobic Ammonium oxidation rate (1/s) - Bristow 2017

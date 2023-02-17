@@ -1,4 +1,4 @@
- function sms =  bgc1d_sourcesink(bgc,t); 
+ function sms =  bgc1d_sourcesink_isos(bgc,t); 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % iNitrOMZ v1.0 - Simon Yang  - April 2019
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,47 +144,16 @@
 	            - bgc.r15nh4 .* (bgc.alpha_ammox_no2 .* Jno2_hx) ...
 	 	    - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
 		    - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;
-	 % N2O indivisual SMS    
+	 % N2O indivisual SMS 
 
-	 sms.i15n2oind.ammox = bgc.r15nh4.* bgc.alpha_ammox_n2o .*sms.n2oind.ammox;
-	 sms.i15n2oind.nden  = bgc.r15nh4.* bgc.alpha_nden_n2o .*sms.n2oind.nden;
-  	 sms.i15n2oind.den2  = 0.04* bgc.alpha_den2 .*sms.n2oind.den2; %bgc.r15no2.* bgc.alpha_den2 .*sms.n2oind.den2;
-
-	 % Get isotopomer partitionning
-	 %ammox
-	 ii = dNisoSP('i15N', sms.i15n2oind.ammox, 'N', sms.n2oind.ammox, 'SP', bgc.n2oSP_ammox); 
-	 sms.i15n2oAind.ammox = ii.i15N_A;
-	 sms.i15n2oBind.ammox = ii.i15N_B;
-	 %nitrifier-denitrification
-	 ii = dNisoSP('i15N', sms.i15n2oind.nden, 'N', sms.n2oind.nden, 'SP', bgc.n2oSP_nden);
-	 sms.i15n2oAind.nden = ii.i15N_A;
-         sms.i15n2oBind.nden = ii.i15N_B;
-	 %denitrification 2 (no2-->n2o)
-	 ii = dNisoSP('i15N', sms.i15n2oind.den2, 'N', sms.n2oind.den2, 'SP', bgc.n2oSP_den2);
-	 sms.i15n2oAind.den2 = ii.i15N_A;
-         sms.i15n2oBind.den2 = ii.i15N_B;
-	 % Total
-	 sms.i15n2oA = sms.i15n2oAind.ammox + sms.i15n2oAind.nden+ sms.i15n2oAind.den2 + bgc.r15n2oA.*bgc.alpha_den3_Alpha.*sms.n2oind.den3;
-	 sms.i15n2oB = sms.i15n2oBind.ammox + sms.i15n2oBind.nden + sms.i15n2oBind.den2 + bgc.r15n2oB.*bgc.alpha_den3_Beta.* sms.n2oind.den3;
-	 sms.i15n2oind.den3  = bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
-     
-    % Try making n2o consumption first-order
-    % sms.i15n2oA = sms.i15n2oAind.ammox + sms.i15n2oAind.nden+ sms.i15n2oAind.den2 - bgc.alpha_den3_Alpha.*bgc.altKDen3.* fexp(t.o2,bgc.KO2Den3) .*t.i15n2oA;
-	% sms.i15n2oB = sms.i15n2oBind.ammox + sms.i15n2oBind.nden + sms.i15n2oBind.den2 - bgc.alpha_den3_Beta.*bgc.altKDen3 .* fexp(t.o2,bgc.KO2Den3) .*t.i15n2oB;
-	% sms.i15n2oind.den3  = bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3 - bgc.alpha_den3_Beta .*bgc.altKDen3 .* fexp(t.o2,bgc.KO2Den3) .*(t.i15n2oA+t.i15n2oB);
-         % Sum all SMS
-         sms.i15n2o = sms.i15n2oind.ammox + sms.i15n2oind.nden + sms.i15n2oind.den2 + sms.i15n2oind.den3;
-
-	 % Checks
-	 if (sms.i15n2oind.ammox ~= sms.i15n2oAind.ammox + sms.i15n2oBind.ammox) 
-	    error('Ammox: prod. of i15n2o is not equal to the summed prod. of i15n2oA and i15n2oB')
-    	 end
-	 if (sms.i15n2oind.nden ~= sms.i15n2oAind.nden + sms.i15n2oBind.nden)
-            error('Nitrifier-denitrificaiton: prod. of i15n2o is not equal to the summed prod. of i15n2oA and i15n2oB')
-         end
-	 if (sms.i15n2oind.den2 ~= sms.i15n2oAind.den2 + sms.i15n2oBind.den2)
-            error('Nitrite reduction (den2): prod. of i15n2o is not equal to the summed prod. of i15n2oA and i15n2oB')
-         end
+     sms.i15n2oA = bgc.r15nh4 .* bgc.alpha_ammox_n2o .* sms.n2oind.ammox ...
+                 + bgc.r15nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden ...
+                 + bgc.r15no2 * bgc.alpha_den2  .* sms.n2oind.den2 ...
+                 + bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
+     sms.i15n2oB = bgc.r15nh4 .* bgc.alpha_ammox_n2o .* sms.n2oind.ammox ...
+                 + bgc.r15nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden ...
+                 + bgc.r15no2 * bgc.alpha_den2  .* sms.n2oind.den2 ...
+                 + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
 
  end
 

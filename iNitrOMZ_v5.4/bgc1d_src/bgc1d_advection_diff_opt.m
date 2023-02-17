@@ -82,7 +82,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
   % Get initial SMS
   % Calculate SMS
   % update 15N/N ratios
-  sms =  bgc1d_sourcesink(bgc,tr);
+  sms =  bgc1d_sourcesink_isos(bgc,tr);
 
   % % % Initialize particulate flux at the top
   fpoc_out(1,1) = bgc.poc_flux_top;
@@ -174,7 +174,7 @@ function [sol sadv sdiff ssms srest] = bgc1d_advection_diff(bgc)
         	tr.(bgc.varname{f}) = tmp(1,:);
   	end
 	% Calculate SMS
-  	sms =  bgc1d_sourcesink(bgc,tr);
+  	sms =  bgc1d_sourcesink_isos(bgc,tr);
   
         %%%% Implicit sinking: update steady state POC sinking flux
   	fpoc_out(2,1) = bgc.poc_flux_top;
