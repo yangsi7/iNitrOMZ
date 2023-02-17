@@ -17,6 +17,8 @@ function bgc = bgc1d_initIso_params(bgc)
  bgc.eps_ammox_no2 = 25.0;          % Enrichment factors during ammox (permil)
  % .. ammox -- NH4-->N2O:
  bgc.eps_ammox_n2o = 47.0;          % Enrichment factors during N2O prod. via NH2OH (permil)
+ bgc.eps_ammox_n2oA = -21.3;        % Santoro et al., 2011(adjusted based on δ15NH4+ value)
+ bgc.eps_ammox_n2oB = 9.0;          % Santoro et al., 2011(adjusted based on δ15NH4+ value)
  % .. nitrif-denitrif -- NH4-->NO2:
  bgc.eps_nden_no2 = 15.0;           % Enrichment factors during nitrifier-denitrification (permil)
  % .. nitrif-denitrif -- NH4-->N2O:
