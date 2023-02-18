@@ -63,4 +63,5 @@ end
 
 % Process model output for analysis (gathers tracers and diagnostics into the bgc structure)
 bgc = bgc1d_postprocess(bgc, Data);
-bgc1d_plot(bgc); 
+%bgc1d_plot(bgc);
+bgc1d_plotisotopes(bgc); 
