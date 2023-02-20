@@ -48,7 +48,7 @@
  bgc.altKDen3 = 0.148/86400*0.6;       % alternate max N2O consumption rate, based on earlier model
 
  % Denitrif4: NO3 --> N2O
- bgc.KDen4 = 0.08/6/(86400);            % Max. denitrif2 rate (1/s)
+ bgc.KDen4 = 0.09/6/(86400); %0.08/6/(86400);            % Max. denitrif2 rate (1/s)
  bgc.KO2Den4 = 0.3;                    % Frey et al., 2020 (Figure 4c): 1/0.175 = 5.71
  bgc.KNO3Den4 = 0.5;                    % Half sat. constant of NO2 for denitrification2 (mmolNO3/m3)
  %%%%%%%%%%% Anammox %%%%%%%%%%%%
