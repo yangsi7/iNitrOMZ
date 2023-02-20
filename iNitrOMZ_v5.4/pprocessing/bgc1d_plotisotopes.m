@@ -28,7 +28,7 @@ function bgc1d_plotisotopes(bgc)
  s.MarkerFaceColor = blue;
  ylabel('z (m)')
  xlabel(char(8240))
- title('\delta^{15}N-NO_2^-')
+ title('\delta^{15}N-NO_3^-')
  ylim( [bgc.zbottom bgc.ztop]);
  legend('model', 'data', 'Location', 'southwest')
 
