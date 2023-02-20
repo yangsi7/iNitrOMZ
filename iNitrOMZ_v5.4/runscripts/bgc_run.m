@@ -52,7 +52,12 @@ toc;
 %end
 
 % Process observations to validate the model solution
-Tracer.name = {'o2' 'no3' 'poc' 'po4' 'n2o' 'nh4' 'no2' 'n2'};
+if bgc.RunIsotopes
+    Tracer.name = {'o2' 'no3' 'poc' 'po4' 'n2o' 'nh4' 'no2' 'n2' 'd15no2' 'd15no3' 'd15Na' 'd15Nb'};
+else
+    Tracer.name = {'o2' 'no3' 'poc' 'po4' 'n2o' 'nh4' 'no2' 'n2'};
+end
+
 if strcmp(bgc.region,'ETNP')
         load([bgc.root,'/Data/compilation_offshore.mat']);
         Data = GA_data_init_opt(bgc,compilation_offshore,Tracer.name);

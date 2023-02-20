@@ -1,27 +1,22 @@
- function sms =  bgc1d_sourcesink_isos(bgc,t); 
+ function sms =  bgc1d_sms_diag_isos(bgc); 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % iNitrOMZ v1.0 - Simon Yang  - April 2019
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % Specifies the biogeochemical sources and sinks for OMZ nutrient/POC/N2O model
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
- % Make sure we have no negative concentration
+t=bgc;
+% Make sure we have no negative concentration
  if bgc.RunIsotopes
      % Update 15N/N ratios
      bgc = bgc1d_initIso_update_r15n(bgc,t);
  end
- ff=fields(t);
- for f = 1 : length(ff)
- 	t.(ff{f})(t.(ff{f})<0)=0;
- end
-
  % % % % % % % % % % % %
  % % % % J-OXIC  % % % %
  % % % % % % % % % % % %
-     %----------------------------------------------------------------------
-     % (1) Oxic Respiration rate (C-units):
-     %----------------------------------------------------------------------
-     RemOx = bgc.Krem .* mm1(t.o2,bgc.KO2Rem) .* t.poc;
+ %----------------------------------------------------------------------
+ % (1) Oxic Respiration rate (C-units):
+ %----------------------------------------------------------------------
+ RemOx = bgc.Krem .* mm1(t.o2,bgc.KO2Rem) .* t.poc;
 
  if ~bgc.RunIsotopes 
      %----------------------------------------------------------------------
@@ -97,7 +92,7 @@
      RemDen1 = bgc.KDen1.* mm1_Iso(t.no3,t.i15no3,bgc.KNO3Den1) .* fexp(t.o2,bgc.KO2Den1) .* t.poc;
      RemDen2 = bgc.KDen2 .* mm1_Iso(t.no2,t.i15no2,bgc.KNO2Den2) .* fexp(t.o2,bgc.KO2Den2) .* t.poc;
      RemDen3 = bgc.KDen3 .* mm1_Iso(t.n2o,t.i15n2o,bgc.KN2ODen3) .* fexp(t.o2,bgc.KO2Den3) .* t.poc;
-     RemDen4 = bgc.KDen2 .* mm1_Iso(t.no3,t.i15no3,bgc.KNO2Den2) .* fexp(t.o2,bgc.KO2Den2) .* t.poc;
+     RemDen4 = bgc.KDen4 .* mm1_Iso(t.no3,t.i15no3,bgc.KNO3Den4) .* fexp(t.o2,bgc.KO2Den4) .* t.poc;
 
      %----------------------------------------------------------------------
      % (6) Anaerobic ammonium oxidation (molN-units):
@@ -114,7 +109,7 @@
  % (8)  Calculate SMS for each tracer
  %---------------------------------------------------------------------- 
  sms.o2   =  (-bgc.OCrem .* RemOx - 1.5.*Ammox - 0.5 .* Nitrox);
- sms.no3  =  (Nitrox - bgc.NCden1 .* RemDen1- bgc.NCden2 .* RemDen4);%.*bgc.r14no3;
+ sms.no3  =  (Nitrox - bgc.NCden1 .* RemDen1- bgc.NCden4 .* RemDen4);%.*bgc.r14no3;
  sms.poc  =  (- RemOx - (RemDen1+RemDen2+RemDen3));
  sms.po4  =  (+bgc.PCrem .* (RemOx) + bgc.PCden1 .* RemDen1 + bgc.PCden2 .* RemDen2 + bgc.PCden3 .* RemDen3);
  sms.nh4  =  (+ bgc.NCrem .* (RemOx + RemDen1 + RemDen2 + RemDen3) - (Jnn2o_hx+Jno2_hx+Jnn2o_nden) - Anammox);%.*bgc.r14nh4;
@@ -126,7 +121,7 @@
  sms.n2oind.nden  = 0.5 .* Jnn2o_nden;
  sms.n2oind.den2  = 0.5 .* bgc.NCden2 .* RemDen2;
  sms.n2oind.den3  = - bgc.NCden3 .* RemDen3;
- sms.n2oind.den4 = 0.5 .* bgc.NCden2 .* RemDen4;
+ sms.n2oind.den4 = 0.5 .* bgc.NCden4 .* RemDen4;
  %sms.n2oind.den3  = - bgc.altKDen3.* fexp(t.o2,bgc.KO2Den3) .*t.n2o; % with first-order rate law
 
  % calculate binomial probabilities
@@ -147,7 +142,7 @@
 	 % Calculate sources and sinks for 15N tracers
 	 sms.i15no3 = bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ...
 	 	    - bgc.r15no3 .* bgc.alpha_den1 .* bgc.NCden1 .* RemDen1 ...
-            - bgc.r15no3 .* bgc.alpha_den1 .* bgc.NCden1 .* RemDen1;
+            - bgc.r15no3 .* bgc.alpha_den2 .* bgc.NCden4 .* RemDen4;
 	 sms.i15no2 = bgc.r15nh4 .* (bgc.alpha_ammox_no2 .* Jno2_hx) ...
 	            + bgc.r15no3 .* bgc.alpha_den1 .* bgc.NCden1 .* RemDen1 ...
 	    	    - bgc.r15no2 .* bgc.alpha_den2 .* bgc.NCden2 .* RemDen2 ...
@@ -155,18 +150,47 @@
 	            - bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ;
 	 sms.i15nh4 = bgc.r15norg.* bgc.NCrem .* (RemOx + RemDen1 + RemDen2 + RemDen3) ...
 	            - bgc.r15nh4 .* (bgc.alpha_ammox_no2 .* Jno2_hx) ...
-	 	    - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
-		    - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;
+	 	        - bgc.r15nh4 .* (bgc.alpha_ammox_n2o .* Jnn2o_hx + bgc.alpha_nden_n2o .* Jnn2o_nden) ...
+		        - bgc.r15nh4 .* bgc.alpha_ax_nh4 .* Anammox;
 	 % N2O indivisual SMS 
 
      sms.i15n2oA = p2nh4 .* bgc.alpha_ammox_n2oA .* sms.n2oind.ammox ...
-                 + p2nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden ...
-                 + p2no2 * bgc.alpha_den2  .* sms.n2oind.den2 ...
+                 + p2nh4 .* bgc.alpha_nden_n2oA .* sms.n2oind.nden ...
+                 + p2no2 * bgc.alpha_den2A  .* sms.n2oind.den2 ...
+                 + p2no3 * bgc.alpha_den2A  .* sms.n2oind.den4 ...
                  + bgc.r15n2oA .* bgc.alpha_den3_Alpha .* sms.n2oind.den3;
      sms.i15n2oB = p3nh4 .* bgc.alpha_ammox_n2oB .* sms.n2oind.ammox ...
-                 + p3nh4 .* bgc.alpha_nden_n2o .* sms.n2oind.nden ...
-                 + p3no2 * bgc.alpha_den2  .* sms.n2oind.den2 ...
+                 + p3nh4 .* bgc.alpha_nden_n2oB .* sms.n2oind.nden ...
+                 + p3no2 * bgc.alpha_den2B  .* sms.n2oind.den2 ...
+                 + p2no3 * bgc.alpha_den2B  .* sms.n2oind.den4 ...
                  + bgc.r15n2oB .* bgc.alpha_den3_Beta .* sms.n2oind.den3;
 
  end
+
+sms.RemOx = RemOx;
+sms.Ammox = Ammox;
+sms.Anammox = Anammox;
+sms.Jno2_hx = Jno2_hx;
+sms.Jnn2o_hx = Jnn2o_hx;
+sms.Jnn2o_nden = Jnn2o_nden;
+sms.Nitrox = Nitrox;
+sms.RemDen1 = RemDen1;
+sms.RemDen2 = RemDen2;
+sms.RemDen3 = RemDen3;
+sms.RemDen4 = RemDen4;
+sms.RemDen = RemDen1 + RemDen2 + RemDen3;
+sms.Jn2o_prod = sms.n2oind.ammox + sms.n2oind.nden + sms.n2oind.den2;
+sms.Jn2o_cons = sms.n2oind.den3;
+sms.Jno2_prod = Jno2_hx + bgc.NCden1 .* RemDen1;
+sms.Jno2_cons = - bgc.NCden2 .* RemDen2 - Anammox - Nitrox;
+sms.kpoc = - (RemDen1 -RemDen2-RemDen3-RemOx)./bgc.poc;
+
+if bgc.RunIsotopes
+	sms.r15no3=bgc.r15no3;
+	sms.r15no2=bgc.r15no2;
+	sms.r15nh4=bgc.r15nh4;
+	sms.r15norg=bgc.r15nh4;
+	sms.r15n2o=bgc.r15n2o;
+end
+
 

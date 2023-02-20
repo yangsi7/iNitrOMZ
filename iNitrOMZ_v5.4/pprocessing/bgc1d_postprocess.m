@@ -30,27 +30,28 @@
 	    ii = dNiso('i15N', bgc.i15no3, 'i14N', bgc.no3);
 	    idx = find(bgc.no3<bgc.IsoThreshold | bgc.i15no3<0);
 	    bgc.d15no3 = ii.d15N;
-	    %bgc.d15no3(idx)=nan;
+	    bgc.d15no3(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15no2, 'i14N', bgc.no2);
             idx = find(bgc.no2<bgc.IsoThreshold | bgc.i15no2<0);
 	    bgc.d15no2 = ii.d15N;
-	    %bgc.d15no2(idx)=nan;
+	    bgc.d15no2(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15nh4, 'i14N', bgc.nh4);
 	    idx = find(bgc.nh4<bgc.IsoThreshold | bgc.i15nh4<0);
 	    bgc.d15nh4 = ii.d15N;
-	    %bgc.d15nh4(idx)=nan;
+	    bgc.d15nh4(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15n2oA, 'i14N', bgc.n2o);
 	    idx = find(bgc.n2o<bgc.IsoThreshold/1000 | bgc.i15n2oA<0);
 	    bgc.d15n2oA = ii.d15N;
-	    %bgc.d15n2oA(idx)=nan;
+	    bgc.d15n2oA(idx)=nan;
 	    ii = dNiso('i15N', bgc.i15n2oB, 'i14N', bgc.n2o);
 	    idx = find(bgc.n2o<bgc.IsoThreshold/1000 | bgc.i15n2oB<0);
 	    bgc.d15n2oB = ii.d15N;
-	    %bgc.d15n2oB(idx)=nan;
+	    bgc.d15n2oB(idx)=nan;
     end
 
-    ntrData = length(bgc.varname);
-    tmp = strcat('Data_', bgc.varname);
+    %ntrData = length(bgc.varname);
+    ntrData = length(Data.name);
+    tmp = strcat('Data_', Data.name);
     for indt=1:ntrData
 	try 
     	    bgc.(tmp{indt}) = Data.val(indt,:);
@@ -70,7 +71,7 @@
  bgc.sms_n2o(1)=0;bgc.sms_n2o(end)=0;bgc.n2o_rest(1) =0; bgc.n2o_rest(end)=0;
  % BGC sources and sink
  % Biological sources and sinks terms
- sms =  bgc1d_sms_diag(bgc); 
+ sms =  bgc1d_sms_diag_isos(bgc); 
 
  bgc.RemOx    = sms.RemOx;
  bgc.Ammox    = sms.Ammox;
@@ -79,7 +80,8 @@
  bgc.RemDen   = sms.RemDen;
  bgc.RemDen1   = sms.RemDen1;
  bgc.RemDen2   = sms.RemDen2;
- bgc.RemDen3   = sms.RemDen3;    
+ bgc.RemDen3   = sms.RemDen3;
+ bgc.RemDen4   = sms.RemDen4;  
  bgc.Jnn2o_hx = sms.Jnn2o_hx;
  bgc.Jnn2o_nden = sms.Jnn2o_nden;
  bgc.Jno2_hx = sms.Jno2_hx;

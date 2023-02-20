@@ -97,7 +97,7 @@
      RemDen1 = bgc.KDen1.* mm1_Iso(t.no3,t.i15no3,bgc.KNO3Den1) .* fexp(t.o2,bgc.KO2Den1) .* t.poc;
      RemDen2 = bgc.KDen2 .* mm1_Iso(t.no2,t.i15no2,bgc.KNO2Den2) .* fexp(t.o2,bgc.KO2Den2) .* t.poc;
      RemDen3 = bgc.KDen3 .* mm1_Iso(t.n2o,t.i15n2o,bgc.KN2ODen3) .* fexp(t.o2,bgc.KO2Den3) .* t.poc;
-     RemDen4 = bgc.KDen2 .* mm1_Iso(t.no3,t.i15no3,bgc.KNO2Den2) .* fexp(t.o2,bgc.KO2Den2) .* t.poc;
+     RemDen4 = bgc.KDen4 .* mm1_Iso(t.no3,t.i15no3,bgc.KNO3Den4) .* fexp(t.o2,bgc.KO2Den4) .* t.poc;
 
      %----------------------------------------------------------------------
      % (6) Anaerobic ammonium oxidation (molN-units):
@@ -114,7 +114,7 @@
  % (8)  Calculate SMS for each tracer
  %---------------------------------------------------------------------- 
  sms.o2   =  (-bgc.OCrem .* RemOx - 1.5.*Ammox - 0.5 .* Nitrox);
- sms.no3  =  (Nitrox - bgc.NCden1 .* RemDen1- bgc.NCden2 .* RemDen4);%.*bgc.r14no3;
+ sms.no3  =  (Nitrox - bgc.NCden1 .* RemDen1- bgc.NCden4 .* RemDen4);%.*bgc.r14no3;
  sms.poc  =  (- RemOx - (RemDen1+RemDen2+RemDen3));
  sms.po4  =  (+bgc.PCrem .* (RemOx) + bgc.PCden1 .* RemDen1 + bgc.PCden2 .* RemDen2 + bgc.PCden3 .* RemDen3);
  sms.nh4  =  (+ bgc.NCrem .* (RemOx + RemDen1 + RemDen2 + RemDen3) - (Jnn2o_hx+Jno2_hx+Jnn2o_nden) - Anammox);%.*bgc.r14nh4;
@@ -126,7 +126,7 @@
  sms.n2oind.nden  = 0.5 .* Jnn2o_nden;
  sms.n2oind.den2  = 0.5 .* bgc.NCden2 .* RemDen2;
  sms.n2oind.den3  = - bgc.NCden3 .* RemDen3;
- sms.n2oind.den4 = 0.5 .* bgc.NCden2 .* RemDen4;
+ sms.n2oind.den4 = 0.5 .* bgc.NCden4 .* RemDen4;
  %sms.n2oind.den3  = - bgc.altKDen3.* fexp(t.o2,bgc.KO2Den3) .*t.n2o; % with first-order rate law
 
  % calculate binomial probabilities
@@ -147,7 +147,7 @@
 	 % Calculate sources and sinks for 15N tracers
 	 sms.i15no3 = bgc.r15no2 .* bgc.alpha_nitrox .* Nitrox ...
 	 	    - bgc.r15no3 .* bgc.alpha_den1 .* bgc.NCden1 .* RemDen1 ...
-            - bgc.r15no3 .* bgc.alpha_den2 .* bgc.NCden2 .* RemDen4;
+            - bgc.r15no3 .* bgc.alpha_den2 .* bgc.NCden4 .* RemDen4;
 	 sms.i15no2 = bgc.r15nh4 .* (bgc.alpha_ammox_no2 .* Jno2_hx) ...
 	            + bgc.r15no3 .* bgc.alpha_den1 .* bgc.NCden1 .* RemDen1 ...
 	    	    - bgc.r15no2 .* bgc.alpha_den2 .* bgc.NCden2 .* RemDen2 ...

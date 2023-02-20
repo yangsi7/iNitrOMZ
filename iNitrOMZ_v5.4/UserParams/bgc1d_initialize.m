@@ -36,7 +36,7 @@
  bgc.dt = 100000; % timestep in seconds bgc.hist =  500; 
  bgc.hist = 1000; % save a snapshot every X timesteps
  bgc.FromRestart = 0; % initialize from restart? 1 yes, 0 no
- bgc.RestartFile = 'spinup_ETSP_restart_158.5.mat'; % restart file
+ bgc.RestartFile = 'spinup_ETNP_restart_158.5.mat'; % restart file
  bgc.SaveRestart = 1; %Save restart file? 1 yes, 0 no
 
  %% Advection diffusion scheme %%
