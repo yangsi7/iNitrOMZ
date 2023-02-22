@@ -26,7 +26,7 @@
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  % Nitrox: NO2 --> NO3
  bgc.KNo =  0.255/(86400);             % 0.256    Max. Nitrite oxidation rate (1/s) - Bristow 2017
- bgc.KNO2No  = 0.0272;                          % Don't know (mmolN/m3)
+ bgc.KNO2No  = 0.0272;                          % Dont know (mmolN/m3)
  bgc.KO2No = 0.778;                     % Half sat. constant of NO2 for Nitrite oxidation (mmolO2/m3) - Bristow 2017
 
  %%%%%%% Denitrification %%%%%%%

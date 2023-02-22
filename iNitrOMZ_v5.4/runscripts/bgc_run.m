@@ -12,7 +12,7 @@
 
 % HERE, specify iNitrOMZ root path ($PATHTOINSTALL/iNitrOMZ/)
 bgc1d_root='/Volumes/GoogleDrive/My Drive/PhD Research/iNitrOMZ/iNitrOMZ_v5.4/';
-addpath(genpath(bgc1d_root)); % adds root to MATLAB's search paths
+addpath(genpath(bgc1d_root)); % adds root to MATLAB search paths
 
 % initialize the model
 clear bgc;
